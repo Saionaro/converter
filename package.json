@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "converter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,5 +11,9 @@
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.11",
+    "typescript": "^4.3.3"
   }
 }
