@@ -1,11 +1,11 @@
 import Head from "next/head";
-import { Converter } from "components/Converter";
+import { Converter } from "src/components/Converter";
 
-export default function Home() {
+export default function Index() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Converter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
