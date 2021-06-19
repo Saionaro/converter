@@ -1,0 +1,12 @@
+.root {
+  transition-duration: 0.3s;
+  transition-property: opacity, outline;
+}
+
+.disabled {
+  opacity: 0.1;
+}
+
+.active {
+  outline: 1px solid red;
+}

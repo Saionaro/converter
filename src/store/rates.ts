@@ -1,40 +1,47 @@
 import { StoreonModule } from "storeon";
-import { Currency } from "src/common-types";
+import { Currency, RatesMap } from "src/common-types";
 import { REFRESH_INTERVAL } from "src/constants/rates";
+import { CURRENCIES } from "src/constants/currencies";
+import { fetchRates } from "src/api/rates";
 
-type RatesMap = Record<Currency, string>;
-
-export type RatesStore = { rates: RatesMap };
+export type RatesStore = {
+  rates: RatesMap;
+  error?: string;
+};
 
 export interface RatesEvents {
   "rates/set": RatesMap;
+  "rates/setError": string | void;
 }
 
-const defaultState: RatesMap = {
-  GBP: "0",
-  EUR: "0",
-  USD: "0",
-};
+const defaultState = CURRENCIES.reduce((acc, cur: Currency) => {
+  acc[cur] = 1;
+  return acc;
+}, {} as RatesMap);
 
-async function fetchRates(callback: (rates: RatesMap) => void): Promise<void> {
-  try {
-    // await fetch rates
-    callback(defaultState);
-  } catch (e) {}
-}
+function syncRates(
+  onSucc: (data: RatesMap) => void,
+  onError: (err: string) => void
+) {
+  if (typeof window !== "undefined") {
+    fetchRates().then(onSucc).catch(onError);
 
-function syncRates(setter: (data: RatesMap) => void) {
-  fetchRates(setter);
-  setInterval(() => {
-    fetchRates(setter);
-  }, REFRESH_INTERVAL);
+    setInterval(() => {
+      // fetchRates().then(onSucc).catch(onError);
+    }, REFRESH_INTERVAL);
+  }
 }
 
 export const rates: StoreonModule<RatesStore, RatesEvents> = (store) => {
   store.on("@init", () => {
-    syncRates((data) => store.dispatch("rates/set", data));
+    syncRates(
+      (data) => store.dispatch("rates/set", data),
+      (error) => store.dispatch("rates/setError", error)
+    );
 
     return { rates: defaultState };
   });
-  store.on("rates/set", (_, rates) => ({ rates }));
+  store.on("rates/set", (oldData, data) => ({
+    rates: { ...oldData.rates, ...data },
+  }));
 };

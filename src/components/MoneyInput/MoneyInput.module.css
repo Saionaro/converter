@@ -1,0 +1,21 @@
+.root {
+  position: relative;
+}
+
+.input {
+  color: transparent;
+  padding: 12px 6px;
+  font-size: 32px;
+}
+
+.view {
+  position: absolute;
+  font-size: 32px;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+}
+
+.inactive {
+  color: #ccc;
+}
