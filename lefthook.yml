@@ -1,0 +1,13 @@
+pre-commit:
+  commands:
+    typecheck:
+      glob: "*.{ts,tsx}"
+      run: npm run typecheck
+
+    linter:
+      glob: "*.{ts,tsx}"
+      run: npm run lint {staged_files} --fix && git add {staged_files}
+
+    prettier:
+      glob: "*.{ts,tsx}"
+      run: node_modules/.bin/prettier {staged_files} --check

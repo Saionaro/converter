@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  checking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run linters
+        run: npm run checkup
+
+      - name: Run tests
+        run: npm run test
