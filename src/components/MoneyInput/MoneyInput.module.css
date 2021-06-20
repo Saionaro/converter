@@ -17,10 +17,16 @@
   order: 2;
   color: transparent;
   padding: 12px 6px;
-  font-size: 0;
+  font-size: 32px;
   width: 300px;
   height: 60px;
   border: none;
+  appearance: none;
+  opacity: 0;
+}
+
+.input::-webkit-inner-spin-button {
+  display: none;
 }
 
 .input:focus {
@@ -77,5 +83,17 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .root {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .input {
+    position: absolute;
+    right: 200%;
   }
 }

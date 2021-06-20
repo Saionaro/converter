@@ -4,6 +4,8 @@
   border-radius: 16px;
   padding: 24px;
   width: 40vw;
+  min-width: 600px;
+  overflow: hidden;
 }
 
 .inputWrapper {
@@ -62,4 +64,14 @@
 
 .submit:disabled {
   opacity: 0.3;
+}
+
+@media screen and (max-width: 700px) {
+  .root {
+    min-width: 100%;
+  }
+
+  .inputWrapper {
+    flex-direction: column;
+  }
 }

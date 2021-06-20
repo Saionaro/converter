@@ -17,6 +17,8 @@ interface Props {
 
 const MAX_LEN = 25;
 
+const noop = (smth: unknown) => smth;
+
 export function MoneyInput({
   value,
   currency,
@@ -53,7 +55,9 @@ export function MoneyInput({
         onKeyUp={handleChange}
         maxLength={MAX_LEN}
         disabled={disabled}
-        readOnly
+        type="number"
+        inputMode="decimal"
+        onChange={noop}
       />
       <h2 className={st.currency}>{currency}</h2>
       {getDisplay(value, currency, Boolean(negative))}
