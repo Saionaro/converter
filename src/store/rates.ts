@@ -27,7 +27,7 @@ function syncRates(
     fetchRates().then(onSucc).catch(onError);
 
     setInterval(() => {
-      // fetchRates().then(onSucc).catch(onError);
+      fetchRates().then(onSucc).catch(onError);
     }, REFRESH_INTERVAL);
   }
 }
