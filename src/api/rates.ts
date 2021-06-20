@@ -13,6 +13,7 @@ export async function fetchRates(): Promise<RatesMap> {
     const response = await fetch(RATES_API_URL);
     const data: RawRatesResponse = await response.json();
     const rates: Partial<RatesMap> = {};
+
     for (const cur of CURRENCIES) {
       rates[cur] = data.rates[cur];
     }

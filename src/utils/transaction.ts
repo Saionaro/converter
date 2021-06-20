@@ -9,8 +9,14 @@ export function commitTransaction(
 ): Partial<WalletsMap> {
   const [fromCur, fromAmount] = transaction[0];
   const [toCur, toAmount] = transaction[1];
-  const fromAmount$ = currencyjs(wallets[fromCur].amount);
-  const toAmount$ = currencyjs(wallets[toCur].amount);
+  const fromAmount$ = currencyjs(wallets[fromCur].amount, {
+    symbol: "",
+    separator: "",
+  });
+  const toAmount$ = currencyjs(wallets[toCur].amount, {
+    symbol: "",
+    separator: "",
+  });
 
   const newFromAmount$ = fromAmount$.subtract(fromAmount);
 
