@@ -47,7 +47,7 @@ export function MoneyInput({
   }, [inputRef]);
 
   return (
-    <div className={st.root} onClick={handleClick}>
+    <div className={st.root} onClick={handleClick} role="button">
       <input
         className={st.input}
         value={value}

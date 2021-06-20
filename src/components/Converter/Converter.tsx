@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import cn from "classnames";
 import { useStoreon } from "storeon/react";
 import { ExchangeInput } from "src/components/ExchangeInput";
 import { CurrencyList } from "src/components/CurrencyList";
@@ -10,8 +9,9 @@ import { usePair } from "./usePair";
 import st from "./Converter.module.css";
 
 export function Converter() {
-  const { dispatch, wallets } =
-    useStoreon<WalletsStore, WalletsEvents>("wallets");
+  const { dispatch, wallets } = useStoreon<WalletsStore, WalletsEvents>(
+    "wallets"
+  );
   const [from, to] = usePair();
   const fromWalletEmpty = wallets[from.currency].empty;
 
