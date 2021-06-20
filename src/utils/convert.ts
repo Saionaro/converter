@@ -9,8 +9,17 @@ interface Params {
 }
 
 export function convert({ from, to, amount, rates }: Params): string {
-  return currencyjs(amount, { symbol: "", separator: "" })
+  const tmp = currencyjs(amount, { symbol: "", separator: "" })
     .divide(rates[from])
     .multiply(rates[to])
     .format();
+
+  let toCut = undefined;
+
+  if (tmp[tmp.length - 1] === "0") {
+    toCut = -1;
+    if (tmp[tmp.length - 2] === "0") toCut -= 2;
+  }
+
+  return tmp.slice(0, toCut);
 }

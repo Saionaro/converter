@@ -9,3 +9,6 @@ export interface Wallet {
 export type RatesMap = Record<Currency, number>;
 
 export type { Currency };
+
+export type TransactionComponent = [Currency, string];
+export type Transaction = [TransactionComponent, TransactionComponent];

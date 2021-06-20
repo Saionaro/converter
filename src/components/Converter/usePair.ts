@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import currencyjs from "currency.js";
 import { useStoreon } from "storeon/react";
 import { WalletsStore } from "src/store/wallets";
@@ -6,7 +6,17 @@ import { RatesStore } from "src/store/rates";
 import { Currency } from "src/constants/currencies";
 import { convert } from "src/utils/convert";
 
-export function usePair() {
+type DisabledMap = Partial<Record<Currency, true>>;
+
+interface PairMember {
+  currency: Currency;
+  val: string;
+  set: (cur: Currency) => void;
+  onChange: (val: string) => void;
+  disabledMap: DisabledMap;
+}
+
+export function usePair(): [PairMember, PairMember] {
   const [from, setFrom] = useState<Currency>("USD");
   const [to, setTo] = useState<Currency>("EUR");
   const { wallets, rates } = useStoreon<WalletsStore & RatesStore>(
@@ -49,11 +59,38 @@ export function usePair() {
   );
 
   useEffect(() => {
+    handleToChange(toVal);
+  }, [wallets[from].currency]);
+
+  useEffect(() => {
     handleFromChange(fromVal);
   }, [rates[to]]);
 
+  const fromDisabled = useMemo(() => {
+    const result: DisabledMap = {};
+    result[from] = true;
+    return result;
+  }, [from]);
+  const toDisabled = useMemo(() => {
+    const result: DisabledMap = {};
+    result[to] = true;
+    return result;
+  }, [to]);
+
   return [
-    { currency: from, val: fromVal, set: setFrom, onChange: handleFromChange },
-    { currency: to, val: toVal, set: setTo, onChange: handleToChange },
+    {
+      currency: from,
+      val: fromVal,
+      set: setFrom,
+      onChange: handleFromChange,
+      disabledMap: fromDisabled,
+    },
+    {
+      currency: to,
+      val: toVal,
+      set: setTo,
+      onChange: handleToChange,
+      disabledMap: toDisabled,
+    },
   ];
 }

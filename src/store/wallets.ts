@@ -1,21 +1,15 @@
-import currencyjs from "currency.js";
 import { StoreonModule } from "storeon";
-import { Currency, Wallet } from "src/common-types";
+import { Currency, Wallet, Transaction } from "src/common-types";
 import { CURRENCIES } from "src/constants/currencies";
+import { toWallet } from "src/utils/wallets";
+import { commitTransaction } from "src/utils/transaction";
 
-type WalletsMap = Record<Currency, Wallet>;
+export type WalletsMap = Record<Currency, Wallet>;
 
-export type WalletsStore = { wallets: WalletsMap };
-
-function toWallet(cur: Currency, amount: string): Wallet {
-  const value = currencyjs(amount);
-
-  return {
-    currency: cur,
-    empty: value.intValue === 0,
-    amount,
-  };
-}
+export type WalletsStore = {
+  wallets: WalletsMap;
+  error?: string;
+};
 
 const initialState = CURRENCIES.reduce((acc, cur: Currency) => {
   const amount = cur === "USD" ? "2500" : "0";
@@ -25,6 +19,7 @@ const initialState = CURRENCIES.reduce((acc, cur: Currency) => {
 
 export interface WalletsEvents {
   "wallets/set": Partial<WalletsMap>;
+  "wallets/transaction": Transaction;
 }
 
 export const wallets: StoreonModule<WalletsStore, WalletsEvents> = (store) => {
@@ -32,4 +27,22 @@ export const wallets: StoreonModule<WalletsStore, WalletsEvents> = (store) => {
   store.on("wallets/set", (oldData, data) => ({
     wallets: { ...oldData.wallets, ...data },
   }));
+  store.on("wallets/transaction", (oldData, pair) => {
+    let dataPiece = {};
+    let error;
+
+    try {
+      dataPiece = commitTransaction(pair, oldData.wallets);
+    } catch (e) {
+      error = e;
+    }
+
+    return {
+      error,
+      wallets: {
+        ...oldData.wallets,
+        ...dataPiece,
+      },
+    };
+  });
 };
