@@ -64,6 +64,10 @@
   animation-iteration-count: infinite;
 }
 
+.input:disabled {
+  background-color: transparent;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;

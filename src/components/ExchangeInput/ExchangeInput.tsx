@@ -13,6 +13,7 @@ interface Props {
   pair: Currency;
   value: string;
   onChange: (val: string) => void;
+  disabled?: boolean;
   negative?: boolean;
 }
 
@@ -22,6 +23,7 @@ export function ExchangeInput({
   value,
   onChange,
   negative,
+  disabled,
 }: Props) {
   const { wallets, rates } = useStoreon<WalletsStore & RatesStore>(
     "wallets",
@@ -38,6 +40,7 @@ export function ExchangeInput({
         currency={currency}
         onChange={onChange}
         negative={negative}
+        disabled={disabled}
       />
       <div className={st.info}>
         <span>

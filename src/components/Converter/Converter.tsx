@@ -10,8 +10,10 @@ import { usePair } from "./usePair";
 import st from "./Converter.module.css";
 
 export function Converter() {
-  const { dispatch } = useStoreon<WalletsStore, WalletsEvents>();
+  const { dispatch, wallets } =
+    useStoreon<WalletsStore, WalletsEvents>("wallets");
   const [from, to] = usePair();
+  const fromWalletEmpty = wallets[from.currency].empty;
 
   const doExchange = useCallback(() => {
     dispatch("wallets/transaction", [
@@ -24,7 +26,6 @@ export function Converter() {
   return (
     <div className={st.root}>
       <h2 className={st.title}>Converter</h2>
-      {/* <hr className={cn(st.separator, st.separatorCompact)} /> */}
       <div className={st.inputWrapper}>
         <CurrencyList
           onActivate={from.set}
@@ -38,6 +39,7 @@ export function Converter() {
           pair={to.currency}
           value={from.val}
           onChange={from.onChange}
+          disabled={fromWalletEmpty}
           negative
         />
       </div>
@@ -51,6 +53,7 @@ export function Converter() {
           currency={to.currency}
           pair={from.currency}
           value={to.val}
+          disabled={fromWalletEmpty}
           onChange={to.onChange}
         />
       </div>

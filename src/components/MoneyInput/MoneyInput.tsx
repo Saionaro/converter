@@ -11,12 +11,19 @@ interface Props {
   value: string;
   currency: Currency;
   onChange: (val: string) => void;
+  disabled?: boolean;
   negative?: boolean;
 }
 
 const MAX_LEN = 25;
 
-export function MoneyInput({ value, currency, negative, onChange }: Props) {
+export function MoneyInput({
+  value,
+  currency,
+  negative,
+  disabled,
+  onChange,
+}: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChange = useCallback(
     ({ key }: KeyboardEvent) => {
@@ -45,6 +52,7 @@ export function MoneyInput({ value, currency, negative, onChange }: Props) {
         ref={inputRef}
         onKeyUp={handleChange}
         maxLength={MAX_LEN}
+        disabled={disabled}
         readOnly
       />
       <h2 className={st.currency}>{currency}</h2>
@@ -61,7 +69,6 @@ function getDisplay(value: string, currency: Currency, negative: boolean) {
   const formattedDecimal = formattedParts[1].split("");
   const letters = formattedParts[0].split("");
   const hasSmth = !isZero(value);
-
   const hasDecimal = originalParts.length > 1;
 
   return (
