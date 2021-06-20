@@ -44,12 +44,13 @@ export function ExchangeInput({
       />
       <div className={st.info}>
         <span>
-          You have{" "}
+          <span>You have</span>
+          <span> </span>
           <MoneyValue currency={currency}>{currentWallet.amount}</MoneyValue>
         </span>
         <span>
           <MoneyValue currency={currency}>1</MoneyValue>
-          {" = "}
+          <span>{" = "}</span>
           <MoneyValue currency={pair}>{pairCost}</MoneyValue>
         </span>
       </div>
