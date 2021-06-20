@@ -6,7 +6,8 @@ import { MoneyInput } from "./MoneyInput";
 const mockCallback = jest.fn((x) => x);
 
 const rend = (params: ComponentProps<typeof MoneyInput>) => {
-  params.value = last(mockCallback.mock.results)?.value ?? "";
+  const lastRes = last(mockCallback.mock.results);
+  params.value = lastRes ? lastRes.value : "";
   cleanup();
   render(<MoneyInput {...params} />);
 };
