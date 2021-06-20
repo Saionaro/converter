@@ -9,5 +9,5 @@ interface Props {
 }
 
 export function MoneyValue({ children, currency }: Props) {
-  return <span className={st.root}>{formatters[currency](children)}</span>;
+  return <span>{formatters[currency](children)}</span>;
 }

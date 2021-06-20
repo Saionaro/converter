@@ -1,7 +1,14 @@
 .root {
-  max-height: 100%;
-  overflow-y: auto;
-  text-align: right;
+  min-height: 100px;
+}
+
+.variants {
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.list {
+  margin-top: 8px;
 }
 
 .item + .item {

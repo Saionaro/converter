@@ -1,0 +1,9 @@
+:root {
+  --color-primary: deepskyblue;
+  --color-primary-light: aliceblue;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray: gray;
+  --color-gray-light: #ccc;
+  --time-interaction: 0.3s;
+}

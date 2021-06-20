@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import cn from "classnames";
 import { useStoreon } from "storeon/react";
 import { ExchangeInput } from "src/components/ExchangeInput";
 import { CurrencyList } from "src/components/CurrencyList";
@@ -22,7 +23,16 @@ export function Converter() {
 
   return (
     <div className={st.root}>
+      <h2 className={st.title}>Converter</h2>
+      {/* <hr className={cn(st.separator, st.separatorCompact)} /> */}
       <div className={st.inputWrapper}>
+        <CurrencyList
+          onActivate={from.set}
+          disabled={from.disabledMap}
+          activeCurrency={from.currency}
+          disableMethod="disable"
+          showAmount
+        />
         <ExchangeInput
           currency={from.currency}
           pair={to.currency}
@@ -30,24 +40,19 @@ export function Converter() {
           onChange={from.onChange}
           negative
         />
-        <CurrencyList
-          onActivate={from.set}
-          disabled={from.disabledMap}
-          showAmount
-        />
       </div>
       <div className={st.separatorWrapper}>
         <hr className={st.separator} />
         <span className={st.separatorLabel}>exchange to</span>
       </div>
       <div className={st.inputWrapper}>
+        <CurrencyList onActivate={to.set} disabled={to.disabledMap} />
         <ExchangeInput
           currency={to.currency}
           pair={from.currency}
           value={to.val}
           onChange={to.onChange}
         />
-        <CurrencyList onActivate={to.set} disabled={to.disabledMap} />
       </div>
       <button
         className={st.submit}

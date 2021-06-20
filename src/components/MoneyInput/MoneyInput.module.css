@@ -8,8 +8,9 @@
 .currency {
   order: 1;
   font-size: 32px;
+  font-weight: 200;
   transition-property: color;
-  transition-duration: 0.3s;
+  transition-duration: var(--time-interaction);
 }
 
 .input {
@@ -32,30 +33,32 @@
   font-size: 32px;
   width: 100%;
   top: 50%;
-  font-family: monospace;
   transform: translateY(-50%);
   transition-property: color;
-  transition-duration: 0.3s;
+  transition-duration: var(--time-interaction);
 }
 
 .input:focus ~ .currency,
 .input:focus ~ .view {
-  color: deepskyblue;
+  color: var(--color-primary);
 }
 
 .inactive {
-  color: #ccc;
+  color: var(--color-gray-light);
 }
 
 .active {
   position: relative;
 }
+
 .input:focus ~ .view .active::after {
   content: "";
   height: 100%;
   width: 2px;
   position: absolute;
-  background-color: #ccc;
+  top: 0;
+  right: 0;
+  background-color: var(--color-gray-light);
   animation: blink;
   animation-duration: 1s;
   animation-iteration-count: infinite;

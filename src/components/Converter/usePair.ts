@@ -91,7 +91,7 @@ export function usePair(): [PairMember, PairMember] {
       if (cur === to) setTo(from);
       setFrom(cur);
     },
-    [setFrom, setTo, from]
+    [setFrom, setTo, from, to]
   );
 
   return [
