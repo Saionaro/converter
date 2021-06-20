@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import { useStoreon } from "storeon/react";
 import { ExchangeInput } from "src/components/ExchangeInput";
-import { CurrencyGrid } from "src/components/CurrencyGrid";
+import { CurrencyList } from "src/components/CurrencyList";
+import { isZero } from "src/utils/convert";
 import { WalletsEvents, WalletsStore } from "src/store/wallets";
 
 import { usePair } from "./usePair";
@@ -11,7 +12,7 @@ export function Converter() {
   const { dispatch } = useStoreon<WalletsStore, WalletsEvents>();
   const [from, to] = usePair();
 
-  const doConvert = useCallback(() => {
+  const doExchange = useCallback(() => {
     dispatch("wallets/transaction", [
       [from.currency, from.val],
       [to.currency, to.val],
@@ -20,17 +21,25 @@ export function Converter() {
   }, [from.currency, to.currency, from.val, to.val]);
 
   return (
-    <div>
+    <div className={st.root}>
       <div className={st.inputWrapper}>
         <ExchangeInput
           currency={from.currency}
           pair={to.currency}
           value={from.val}
           onChange={from.onChange}
+          negative
         />
-        <CurrencyGrid onActivate={from.set} disabled={from.disabledMap} />
+        <CurrencyList
+          onActivate={from.set}
+          disabled={from.disabledMap}
+          showAmount
+        />
       </div>
-      <hr />
+      <div className={st.separatorWrapper}>
+        <hr className={st.separator} />
+        <span className={st.separatorLabel}>exchange to</span>
+      </div>
       <div className={st.inputWrapper}>
         <ExchangeInput
           currency={to.currency}
@@ -38,10 +47,14 @@ export function Converter() {
           value={to.val}
           onChange={to.onChange}
         />
-        <CurrencyGrid onActivate={to.set} disabled={to.disabledMap} />
+        <CurrencyList onActivate={to.set} disabled={to.disabledMap} />
       </div>
-      <button onClick={doConvert} disabled={from.currency === to.currency}>
-        Convert
+      <button
+        className={st.submit}
+        onClick={doExchange}
+        disabled={isZero(from.val)}
+      >
+        Exchange
       </button>
     </div>
   );

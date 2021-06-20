@@ -11,8 +11,8 @@ export type WalletsStore = {
   error?: string;
 };
 
-const initialState = CURRENCIES.reduce((acc, cur: Currency) => {
-  const amount = cur === "USD" ? "2500" : "0";
+const initialState = CURRENCIES.reduce((acc, cur: Currency, index) => {
+  const amount = index % 2 ? "2500" : "1500";
   acc[cur] = toWallet(cur, amount);
   return acc;
 }, {} as WalletsMap);
@@ -24,9 +24,11 @@ export interface WalletsEvents {
 
 export const wallets: StoreonModule<WalletsStore, WalletsEvents> = (store) => {
   store.on("@init", () => ({ wallets: initialState }));
+
   store.on("wallets/set", (oldData, data) => ({
     wallets: { ...oldData.wallets, ...data },
   }));
+
   store.on("wallets/transaction", (oldData, pair) => {
     let dataPiece = {};
     let error;

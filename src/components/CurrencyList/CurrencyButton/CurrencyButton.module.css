@@ -1,0 +1,28 @@
+.root {
+  background-color: #fff;
+  border: 1px solid deepskyblue;
+  border-radius: 12px;
+  line-height: 30px;
+  padding: 0px 16px;
+  cursor: pointer;
+  transition-property: opacity, background-color;
+  transition-duration: 0.3s;
+}
+
+.root:hover,
+.root:focus {
+  background-color: aliceblue;
+  outline: none;
+}
+
+.root:active {
+  opacity: 0.6;
+}
+
+.amount {
+  display: inline-block;
+  line-height: 30px;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid deepskyblue;
+}

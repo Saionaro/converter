@@ -23,3 +23,7 @@ export function convert({ from, to, amount, rates }: Params): string {
 
   return tmp.slice(0, toCut);
 }
+
+export function isZero(val: string): boolean {
+  return currencyjs(val).value === 0;
+}

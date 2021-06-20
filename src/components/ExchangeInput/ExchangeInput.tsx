@@ -13,9 +13,16 @@ interface Props {
   pair: Currency;
   value: string;
   onChange: (val: string) => void;
+  negative?: boolean;
 }
 
-export function ExchangeInput({ currency, pair, value, onChange }: Props) {
+export function ExchangeInput({
+  currency,
+  pair,
+  value,
+  onChange,
+  negative,
+}: Props) {
   const { wallets, rates } = useStoreon<WalletsStore & RatesStore>(
     "wallets",
     "rates"
@@ -26,15 +33,17 @@ export function ExchangeInput({ currency, pair, value, onChange }: Props) {
 
   return (
     <div className={st.root}>
-      <h2>{currency}</h2>
-      <MoneyInput value={value} currency={currency} onChange={onChange} />
-      <div>
+      <MoneyInput
+        value={value}
+        currency={currency}
+        onChange={onChange}
+        negative={negative}
+      />
+      <div className={st.info}>
         <span>
           You have{" "}
           <MoneyValue currency={currency}>{currentWallet.amount}</MoneyValue>
         </span>
-      </div>
-      <div>
         <span>
           <MoneyValue currency={currency}>1</MoneyValue>
           {" = "}

@@ -1,27 +1,74 @@
 .root {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   cursor: text;
 }
 
+.currency {
+  order: 1;
+  font-size: 32px;
+  transition-property: color;
+  transition-duration: 0.3s;
+}
+
 .input {
+  order: 2;
   color: transparent;
   padding: 12px 6px;
   font-size: 0;
   width: 300px;
   height: 60px;
+  border: none;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .view {
   position: absolute;
   text-align: right;
   font-size: 32px;
-  padding: 0 6px;
   width: 100%;
   top: 50%;
+  font-family: monospace;
   transform: translateY(-50%);
+  transition-property: color;
+  transition-duration: 0.3s;
+}
+
+.input:focus ~ .currency,
+.input:focus ~ .view {
+  color: deepskyblue;
 }
 
 .inactive {
   color: #ccc;
+}
+
+.active {
+  position: relative;
+}
+.input:focus ~ .view .active::after {
+  content: "";
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  background-color: #ccc;
+  animation: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

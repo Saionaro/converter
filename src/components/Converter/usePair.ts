@@ -3,7 +3,7 @@ import currencyjs from "currency.js";
 import { useStoreon } from "storeon/react";
 import { WalletsStore } from "src/store/wallets";
 import { RatesStore } from "src/store/rates";
-import { Currency } from "src/constants/currencies";
+import { CURRENCIES, Currency } from "src/constants/currencies";
 import { convert } from "src/utils/convert";
 
 type DisabledMap = Partial<Record<Currency, true>>;
@@ -68,20 +68,37 @@ export function usePair(): [PairMember, PairMember] {
 
   const fromDisabled = useMemo(() => {
     const result: DisabledMap = {};
+
     result[from] = true;
+
+    for (const cur of CURRENCIES) {
+      if (wallets[cur].empty) {
+        result[cur] = true;
+      }
+    }
+
     return result;
-  }, [from]);
+  }, [from, wallets]);
   const toDisabled = useMemo(() => {
     const result: DisabledMap = {};
     result[to] = true;
+    result[from] = true;
     return result;
-  }, [to]);
+  }, [to, from]);
+
+  const handleFromSet = useCallback(
+    (cur: Currency) => {
+      if (cur === to) setTo(from);
+      setFrom(cur);
+    },
+    [setFrom, setTo, from]
+  );
 
   return [
     {
       currency: from,
       val: fromVal,
-      set: setFrom,
+      set: handleFromSet,
       onChange: handleFromChange,
       disabledMap: fromDisabled,
     },

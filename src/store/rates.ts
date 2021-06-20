@@ -41,6 +41,7 @@ export const rates: StoreonModule<RatesStore, RatesEvents> = (store) => {
 
     return { rates: defaultState };
   });
+
   store.on("rates/set", (oldData, data) => ({
     rates: { ...oldData.rates, ...data },
   }));
