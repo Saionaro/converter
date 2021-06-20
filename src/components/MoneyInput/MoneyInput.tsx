@@ -1,4 +1,4 @@
-import { useCallback, KeyboardEvent, useRef } from "react";
+import React, { useCallback, KeyboardEvent, useRef } from "react";
 import cn from "classnames";
 import { Currency } from "src/common-types";
 import { formatters } from "src/utils/format";
@@ -58,6 +58,7 @@ export function MoneyInput({
         type="number"
         inputMode="decimal"
         onChange={noop}
+        data-testid="input"
       />
       <h2 className={st.currency}>{currency}</h2>
       {getDisplay(value, currency, Boolean(negative))}
