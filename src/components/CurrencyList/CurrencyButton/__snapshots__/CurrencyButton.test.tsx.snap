@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CurrencyButton fit snapshot 1`] = `
+<button
+  class=""
+  data-testid="currency-button"
+>
+  USD
+</button>
+`;

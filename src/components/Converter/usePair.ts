@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import currencyjs from "currency.js";
-import { useStoreon } from "storeon/react";
-import { WalletsStore } from "src/store/wallets";
-import { RatesStore } from "src/store/rates";
+import { useWallets, useRates } from "src/store";
 import { CURRENCIES, Currency } from "src/constants/currencies";
 import { convert } from "src/utils/convert";
 
@@ -19,10 +17,9 @@ interface PairMember {
 export function usePair(): [PairMember, PairMember] {
   const [from, setFrom] = useState<Currency>("USD");
   const [to, setTo] = useState<Currency>("EUR");
-  const { wallets, rates } = useStoreon<WalletsStore & RatesStore>(
-    "wallets",
-    "rates"
-  );
+
+  const { rates } = useRates();
+  const { wallets } = useWallets();
 
   const [fromVal, setFromVal] = useState("");
   const [toVal, setToVal] = useState("");

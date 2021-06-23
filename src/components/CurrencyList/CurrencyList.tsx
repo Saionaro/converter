@@ -1,10 +1,9 @@
-import { useStoreon } from "storeon/react";
+import React, { useCallback } from "react";
+import { useWallets } from "src/store";
 import { CURRENCIES, Currency } from "src/constants/currencies";
-import { WalletsStore } from "src/store/wallets";
 
 import { CurrencyButton } from "./CurrencyButton";
 import st from "./CurrencyList.module.css";
-import { useCallback } from "react";
 
 interface Props {
   onActivate: (val: Currency) => void;
@@ -21,7 +20,7 @@ export function CurrencyList({
   activeCurrency,
   disableMethod = "hide",
 }: Props) {
-  const { wallets } = useStoreon<WalletsStore>("wallets");
+  const { wallets } = useWallets();
   const handleClick = useCallback(
     (cur: Currency) => onActivate(cur),
     [onActivate]

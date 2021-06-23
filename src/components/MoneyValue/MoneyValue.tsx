@@ -1,3 +1,4 @@
+import React from "react";
 import { Currency } from "src/common-types";
 import { formatters } from "src/utils/format";
 

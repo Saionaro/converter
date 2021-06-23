@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ExchangeInput fit snapshot 1`] = `
+<div>
+  <div
+    role="button"
+  >
+    <input
+      data-testid="input"
+      inputmode="decimal"
+      maxlength="25"
+      type="number"
+      value=""
+    />
+    <h2>
+      USD
+    </h2>
+    <div>
+      <span
+        class=""
+      >
+        $
+      </span>
+      <span
+        class="undefined"
+      >
+        0
+      </span>
+      <span
+        class=""
+      >
+        .
+      </span>
+      <span
+        class=""
+      >
+        0
+      </span>
+      <span
+        class=""
+      >
+        0
+      </span>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span>
+        You have 
+      </span>
+      <span>
+        $1,500.00
+      </span>
+    </span>
+    <span>
+      <span>
+        $1.00
+      </span>
+      <span>
+         = 
+      </span>
+      <span>
+        £1.00
+      </span>
+    </span>
+  </div>
+</div>
+`;

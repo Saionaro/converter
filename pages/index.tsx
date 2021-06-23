@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { Converter } from "src/components/Converter";
 
+import st from "./index.module.css";
+
 export default function Index() {
   return (
     <>
@@ -10,7 +12,7 @@ export default function Index() {
       </Head>
 
       <main>
-        <Converter />
+        <Converter className={st.converter} />
       </main>
     </>
   );

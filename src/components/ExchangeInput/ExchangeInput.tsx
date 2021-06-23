@@ -1,10 +1,9 @@
-import { useStoreon } from "storeon/react";
+import React from "react";
 import { Currency } from "src/common-types";
-import { WalletsStore } from "src/store/wallets";
-import { RatesStore } from "src/store/rates";
 import { MoneyValue } from "src/components/MoneyValue";
 import { convert } from "src/utils/convert";
 import { MoneyInput } from "src/components/MoneyInput";
+import { useRates, useWallets } from "src/store";
 
 import st from "./ExchangeInput.module.css";
 
@@ -25,11 +24,8 @@ export function ExchangeInput({
   negative,
   disabled,
 }: Props) {
-  const { wallets, rates } = useStoreon<WalletsStore & RatesStore>(
-    "wallets",
-    "rates"
-  );
-
+  const { wallets } = useWallets();
+  const { rates } = useRates();
   const currentWallet = wallets[currency];
   const pairCost = convert({ from: currency, to: pair, amount: "1", rates });
 
@@ -44,8 +40,7 @@ export function ExchangeInput({
       />
       <div className={st.info}>
         <span>
-          <span>You have</span>
-          <span> </span>
+          <span>You have </span>
           <MoneyValue currency={currency}>{currentWallet.amount}</MoneyValue>
         </span>
         <span>

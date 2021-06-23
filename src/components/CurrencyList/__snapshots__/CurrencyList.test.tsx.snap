@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CurrencyList disableMethod: hides extra items 1`] = `
+<div>
+  <h3>
+    Wallets
+  </h3>
+  <ul>
+    <li>
+      <button
+        class=""
+        data-testid="currency-button"
+      >
+        EUR
+      </button>
+    </li>
+    <li>
+      <button
+        class=""
+        data-testid="currency-button"
+      >
+        GBP
+      </button>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`components/CurrencyList fit snapshot 1`] = `
+<div>
+  <h3>
+    Wallets
+  </h3>
+  <ul>
+    <li>
+      <button
+        class=""
+        data-testid="currency-button"
+      >
+        USD
+      </button>
+    </li>
+    <li>
+      <button
+        class=""
+        data-testid="currency-button"
+      >
+        EUR
+      </button>
+    </li>
+    <li>
+      <button
+        class=""
+        data-testid="currency-button"
+      >
+        GBP
+      </button>
+    </li>
+  </ul>
+</div>
+`;

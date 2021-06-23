@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/MoneyValue renders a correct zero 1`] = `
+<span>
+  $0.00
+</span>
+`;
+
+exports[`components/MoneyValue renders a formatted money 1`] = `
+<span>
+  $5,400.00
+</span>
+`;

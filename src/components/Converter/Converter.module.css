@@ -24,6 +24,12 @@
   margin-bottom: 24px;
 }
 
+.error {
+  color: var(--color-error);
+  margin-top: 24px;
+  text-align: center;
+}
+
 .separatorWrapper {
   position: relative;
 }

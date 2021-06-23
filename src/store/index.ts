@@ -1,8 +1,13 @@
-import { createStoreon } from "storeon";
-import { rates, RatesStore, RatesEvents } from "./rates";
-import { wallets, WalletsStore, WalletsEvents } from "./wallets";
+import { useContext } from "react";
+import { RatesContext } from "./rates";
+import { WalletsContext } from "./wallets";
 
-type Store = RatesStore & WalletsStore;
-type Events = RatesEvents & WalletsEvents;
+export function useRates() {
+  return useContext(RatesContext);
+}
 
-export const store = createStoreon<Store, Events>([wallets, rates]);
+export function useWallets() {
+  return useContext(WalletsContext);
+}
+
+export { Wrapper } from "./Wrapper";

@@ -1,30 +1,32 @@
 import { useCallback } from "react";
-import { useStoreon } from "storeon/react";
+import { useWallets } from "src/store";
 import { ExchangeInput } from "src/components/ExchangeInput";
 import { CurrencyList } from "src/components/CurrencyList";
 import { isZero } from "src/utils/convert";
-import { WalletsEvents, WalletsStore } from "src/store/wallets";
 
 import { usePair } from "./usePair";
 import st from "./Converter.module.css";
 
-export function Converter() {
-  const { dispatch, wallets } = useStoreon<WalletsStore, WalletsEvents>(
-    "wallets"
-  );
+interface Props {
+  className?: string;
+}
+
+export function Converter({ className }: Props) {
+  const { wallets, error, doTransaction } = useWallets();
   const [from, to] = usePair();
   const fromWalletEmpty = wallets[from.currency].empty;
 
   const doExchange = useCallback(() => {
-    dispatch("wallets/transaction", [
+    const isSuccess = doTransaction([
       [from.currency, from.val],
       [to.currency, to.val],
     ]);
-    from.onChange("0");
+
+    if (isSuccess) from.onChange("0");
   }, [from.currency, to.currency, from.val, to.val]);
 
   return (
-    <div className={st.root}>
+    <div className={[st.root, className].join(" ")}>
       <h2 className={st.title}>Converter</h2>
       <div className={st.inputWrapper}>
         <CurrencyList
@@ -64,6 +66,7 @@ export function Converter() {
       >
         Exchange
       </button>
+      {Boolean(error) && <p className={st.error}>{error}</p>}
     </div>
   );
 }

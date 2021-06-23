@@ -5,5 +5,6 @@
   --color-white: #fff;
   --color-gray: gray;
   --color-gray-light: #ccc;
+  --color-error: orangered;
   --time-interaction: 0.3s;
 }

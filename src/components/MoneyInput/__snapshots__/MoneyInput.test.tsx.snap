@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/MoneyInput fit snapshot renders 1`] = `
+<div
+  role="button"
+>
+  <input
+    data-testid="input"
+    inputmode="decimal"
+    maxlength="25"
+    type="number"
+    value=""
+  />
+  <h2>
+    USD
+  </h2>
+  <div>
+    <span
+      class=""
+    >
+      $
+    </span>
+    <span
+      class="undefined"
+    >
+      0
+    </span>
+    <span
+      class=""
+    >
+      .
+    </span>
+    <span
+      class=""
+    >
+      0
+    </span>
+    <span
+      class=""
+    >
+      0
+    </span>
+  </div>
+</div>
+`;
