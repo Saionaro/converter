@@ -33,7 +33,7 @@ export const RatesProvider = ({ children }: Props) => {
     fetchRates().then(setState).catch(setError);
 
     const refreshInterval = setInterval(() => {
-      // fetchRates().then(setState).catch(setError);
+      fetchRates().then(setState).catch(setError);
     }, REFRESH_INTERVAL);
 
     return () => clearInterval(refreshInterval);
