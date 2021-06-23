@@ -15,14 +15,14 @@ interface PairMember {
 }
 
 export function usePair(): [PairMember, PairMember] {
-  const [from, setFrom] = useState<Currency>("USD");
-  const [to, setTo] = useState<Currency>("EUR");
+  const [from, setFrom] = useState<Currency>(CURRENCIES[0]);
+  const [to, setTo] = useState<Currency>(CURRENCIES[1]);
 
   const { rates } = useRates();
   const { wallets } = useWallets();
 
-  const [fromVal, setFromVal] = useState("");
-  const [toVal, setToVal] = useState("");
+  const [fromVal, setFromVal] = useState("0");
+  const [toVal, setToVal] = useState("0");
 
   const handleFromChange = useCallback(
     (val: string) => {

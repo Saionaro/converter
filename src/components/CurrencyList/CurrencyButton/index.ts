@@ -1,1 +1,1 @@
-export { CurrencyButton } from "./CurrencyButton";
+export { CurrencyButton, TEST_ID } from "./CurrencyButton";
